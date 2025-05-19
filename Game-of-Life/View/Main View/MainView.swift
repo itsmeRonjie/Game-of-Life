@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
+    @State private var boardModel: BoardModel = BoardModel(gridSize: 50)
+    @State private var selectedDesign: DesignType = .tub
+    @State private var swapXY: Bool = false
+    @State private var currentImage: ImageResource = .mountain1
+    @State private var showImage: Bool = true
+    
     var body: some View {
         ZStack {
             BackgroundView()
@@ -17,11 +23,11 @@ struct MainView: View {
                 Spacer()
                 
                 BoardView(
-                    boardModel: .constant(BoardModel(gridSize: 50)),
-                    selectedDesign: .constant(.tub),
-                    swapXY: .constant(false),
-                    currentImage: .constant(.mountain1),
-                    showImage: .constant(true)
+                    boardModel: $boardModel,
+                    selectedDesign: $selectedDesign,
+                    swapXY: $swapXY,
+                    currentImage: $currentImage,
+                    showImage: $showImage
                 )
                 
                 Spacer()
