@@ -16,7 +16,13 @@ struct MainView: View {
                 
                 Spacer()
                 
-                BoardView()
+                BoardView(
+                    boardModel: .constant(BoardModel(gridSize: 50)),
+                    selectedDesign: .constant(.tub),
+                    swapXY: .constant(false),
+                    currentImage: .constant(.mountain1),
+                    showImage: .constant(true)
+                )
                 
                 Spacer()
                 
