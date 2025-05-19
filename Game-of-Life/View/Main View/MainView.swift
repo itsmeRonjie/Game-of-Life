@@ -9,23 +9,30 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        VStack {
-            Text("Game of Life")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            
-            Spacer()
-            
-            BoardView()
-            
-            Spacer()
-            
-            ControlView()
+        ZStack {
+            BackgroundView()
+            VStack {
+                TitleView()
+                
+                Spacer()
+                
+                BoardView()
+                
+                Spacer()
+                
+                ControlView()
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     MainView()
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    MainView()
+        .preferredColorScheme(.dark)
 }
