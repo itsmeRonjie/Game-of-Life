@@ -14,8 +14,8 @@ struct MainView: View {
     @State private var currentImage: ImageResource = .mountain1
     @State private var showImage: Bool = true
     @State private var isPlaying: Bool = true
-
     @State private var timer: Timer?
+    @State private var speed: Double = 200.0
     
     let MIN_SECONDS: Double = 0.01
     let MAX_SECONDS: Double = 3.0
@@ -24,14 +24,13 @@ struct MainView: View {
         MAX_SPEED / 2
     }
     
-    var a: Double {
-        (MIN_SECONDS - MAX_SECONDS) / MAX_SPEED
-    }
-    
-    var speed: Double {
-        1 / a * (MAX_TIME - MAX_SECONDS)
-    }
-
+    //    var a: Double {
+    //        (MIN_SECONDS - MAX_SECONDS) / MAX_SPEED
+    //    }
+    //
+    //    var speed: Double {
+    //        1 / a * (MAX_TIME - MAX_SECONDS)
+    //    }
     
     var body: some View {
         ZStack {
@@ -57,7 +56,7 @@ struct MainView: View {
         }
         .onAppear { startGame() }
         .onChange(of: speed) { _, newSpeed in
-            // TODO: Reset Speed
+            resetSpeed()
         }
     }
     
@@ -74,6 +73,21 @@ struct MainView: View {
                 }
             }
         )
+    }
+    
+    func stopGame() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    func resetSpeed() {
+        stopGame()
+        startGame()
+    }
+    
+    func resetGame() {
+        boardModel.clearBoard()
+        stopGame()
     }
 }
 
