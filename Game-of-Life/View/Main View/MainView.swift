@@ -16,21 +16,7 @@ struct MainView: View {
     @State private var isPlaying: Bool = true
     @State private var timer: Timer?
     @State private var speed: Double = 200.0
-    
-    let MIN_SECONDS: Double = 0.01
-    let MAX_SECONDS: Double = 3.0
-    let MAX_SPEED: Double = 10.0
-    var MAX_TIME: Double {
-        MAX_SPEED / 2
-    }
-    
-    //    var a: Double {
-    //        (MIN_SECONDS - MAX_SECONDS) / MAX_SPEED
-    //    }
-    //
-    //    var speed: Double {
-    //        1 / a * (MAX_TIME - MAX_SECONDS)
-    //    }
+    @State private var isShown: Bool = false
     
     var body: some View {
         ZStack {
@@ -50,11 +36,21 @@ struct MainView: View {
                 
                 Spacer()
                 
-                DesignSelectionView(
-                    selectedDesign: $selectedDesign,
-                    swapXY: $swapXY
+                if isShown {
+                    DesignSelectionView(
+                        selectedDesign: $selectedDesign,
+                        swapXY: $swapXY
+                    )
+                }
+                
+                ControlView(
+                    showImage: $showImage,
+                    currentImage: $currentImage,
+                    speed: $speed,
+                    isPlaying: $isPlaying,
+                    isShown: $isShown,
+                    boardModel: $boardModel
                 )
-                ControlView()
             }
             .padding()
         }
