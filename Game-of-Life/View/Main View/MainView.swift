@@ -50,6 +50,10 @@ struct MainView: View {
                 
                 Spacer()
                 
+                DesignSelectionView(
+                    selectedDesign: $selectedDesign,
+                    swapXY: $swapXY
+                )
                 ControlView()
             }
             .padding()

@@ -27,7 +27,27 @@ struct DesignSelectionView: View {
                     .rotationEffect(.degrees(swapXY ? 90 : 0))
             }
 
+            ScrollView(.horizontal) {
+                HStack(spacing: 8) {
+                    ForEach(DesignType.allCases, id: \.self) { design in
+                        Button {
+                            withAnimation {
+                                selectedDesign = design
+                            }
+                        } label: {
+                            Text("\(design)")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .scaleEffect(selectedDesign == design ? 1.05 : 1.0)
+                        .shadow(radius: selectedDesign == design ? 5 : 0)
+                    }
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal, 10)
+            }
+            .scrollIndicators(.hidden)
         }
+        .shadow(radius: 8)
     }
     
     // TODO: Implement
